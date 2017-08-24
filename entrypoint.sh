@@ -14,8 +14,8 @@ fi
 if [ -z "${GIT_USER_EMAIL}" ]; then
   die "GIT_USER_EMAIL must be specified!"
 fi
-if [ -z "${GIT_REPO_URL}" ]; then
-  die "GIT_REPO_URL must be specified!"
+if [ -z "${GIT_REPO_URL}" ] && [ -z "${GIT_WORK_TREE}" ]; then
+  die "GIT_REPO_URL or GIT_WORK_TREE must be specified!"
 fi
 
 # Ensure correct permissions
@@ -38,6 +38,8 @@ echo "GIT_USER_NAME=${GIT_USER_NAME}" >> /etc/sync_env
 echo "GIT_USER_EMAIL=${GIT_USER_EMAIL}" >> /etc/sync_env
 echo "GIT_REPO_URL=${GIT_REPO_URL}" >> /etc/sync_env
 echo "GIT_REPO_BRANCH=${GIT_REPO_BRANCH}" >> /etc/sync_env
+echo "GIT_DIR=${GIT_DIR}" >> /etc/sync_env
+echo "GIT_WORK_TREE=${GIT_WORK_TREE}" >> /etc/sync_env
 
 # CRON_TIME can be set via environment
 # If not defined, the default is every minute
